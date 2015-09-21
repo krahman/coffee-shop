@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'menus/new'
+
+  get 'menus/create'
+
+  get 'menus/update'
+
+  get 'menus/edit'
+
+  get 'menus/destroy'
+
+  get 'menus/index'
+
+  get 'menus/show'
+
   get 'sizes/new'
 
   get 'sizes/create'
