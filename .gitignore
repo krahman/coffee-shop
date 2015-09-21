@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore all vendor packages
+/vendor/bundle
+
+# Ignore rubymine folder
+.idea
