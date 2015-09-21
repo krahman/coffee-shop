@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'sizes/new'
+
+  get 'sizes/create'
+
+  get 'sizes/update'
+
+  get 'sizes/edit'
+
+  get 'sizes/destroy'
+
+  get 'sizes/index'
+
+  get 'sizes/show'
+
   get 'types/new'
 
   get 'types/create'
