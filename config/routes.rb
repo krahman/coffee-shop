@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'orders/new'
+
+  get 'orders/create'
+
+  get 'orders/update'
+
+  get 'orders/edit'
+
+  get 'orders/destroy'
+
+  get 'orders/index'
+
+  get 'orders/show'
+
   get 'menus/new'
 
   get 'menus/create'
