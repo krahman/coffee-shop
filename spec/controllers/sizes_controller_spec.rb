@@ -62,11 +62,6 @@ RSpec.describe SizesController, type: :controller do
       get :index
       expect(assigns(:sizes)).to eq(Size.all)
     end
-
-    it "redirects to size index page" do
-      get :index
-      expect(response).to redirect_to sizes_index_path
-    end
   end
 
   describe "GET #show" do

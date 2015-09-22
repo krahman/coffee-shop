@@ -62,11 +62,6 @@ RSpec.describe TypesController, type: :controller do
       get :index
       expect(assigns(:types)).to eq(Type.all)
     end
-
-    it "redirects to type index page" do
-      get :index
-      expect(response).to redirect_to types_index_path
-    end
   end
 
   describe "GET #show" do
