@@ -17,12 +17,12 @@ RSpec.describe SizesController, type: :controller do
     context 'with valid attributes' do
       it "creates a new size" do
         expect{
-          post :create, id: @size, type: FactoryGirl.attributes_for(:size)
+          post :create, id: @size, size: FactoryGirl.attributes_for(:size)
         }.to change(Size, :count).by(1)
       end
 
       it 'redirects to the "show" action for the new size' do
-        post :create, id: @size, type: FactoryGirl.attributes_for(:size)
+        post :create, id: @size, size: FactoryGirl.attributes_for(:size)
         expect(response).to redirect_to sizes_show_path(Size.last)
       end
     end 
@@ -31,7 +31,7 @@ RSpec.describe SizesController, type: :controller do
   describe "PUT #update" do
     context 'with valid attributes' do
       it "update the requrested @size" do
-        put :update, id: @size, type: FactoryGirl.attributes_for(:size)
+        put :update, id: @size, size: FactoryGirl.attributes_for(:size)
         expect(assigns(:size)).to eq(@size)
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe SizesController, type: :controller do
 
   describe "GET #edit" do
     it "edit the requested @size" do
-      get :edit, {:name => 'Small', :id => @size}
+      get :edit, {:id => @size}
       expect(assigns(:size)).to eq(@size)
     end
   end
@@ -47,12 +47,12 @@ RSpec.describe SizesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested size" do
       expect{
-        delete :destroy, {:name => 'Grande', :id => @size}
+        delete :destroy, {:id => @size}
       }.to change(Size, :count).by(-1)
     end
 
     it 'redirects to the size index page' do
-      delete :destroy, {:name => 'Grande', :id => @size}
+      delete :destroy, {:id => @size}
       expect(response).to redirect_to sizes_index_path
     end
   end

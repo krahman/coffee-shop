@@ -44,7 +44,7 @@ class SizesController < ApplicationController
 
   private
     def size_params
-      params.require(:type).permit(:name)
+      params.require(:size).permit(:name)
     end
 
 end
