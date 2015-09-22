@@ -47,7 +47,7 @@ RSpec.describe TypesController, type: :controller do
     it "destroys the requested type" do
       expect{
         delete :destroy, {:name => 'Coffee', :id => @type}
-      }.to change(Size, :count).by(-1)
+      }.to change(Type, :count).by(-1)
     end
 
     it 'redirects to the type index page' do

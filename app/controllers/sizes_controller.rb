@@ -35,7 +35,6 @@ class SizesController < ApplicationController
 
   def index
     @sizes = Size.all
-    redirect_to sizes_index_path
   end
 
   def show

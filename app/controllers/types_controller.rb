@@ -36,7 +36,6 @@ class TypesController < ApplicationController
 
   def index
     @types = Type.all
-    redirect_to types_index_path
   end
 
   def show
