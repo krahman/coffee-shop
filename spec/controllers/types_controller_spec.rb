@@ -47,39 +47,38 @@ RSpec.describe TypesController, type: :controller do
     it "destroys the requested type" do
       expect{
         delete :destroy, {:name => 'Coffee', :id => @type}
-        }.to change(Type, :count).by(-1)
-      end
-
-      it 'redirects to the type index page' do
-        delete :destroy, {:name => 'Coffee', :id => @type}
-        expect(response).to redirect_to types_index_path
-      end
+      }.to change(Size, :count).by(-1)
     end
 
-    describe "GET #index" do
+    it 'redirects to the type index page' do
+      delete :destroy, {:name => 'Coffee', :id => @type}
+      expect(response).to redirect_to types_index_path
+    end
+  end
 
-      it "get all type list" do
-        get :index
-        expect(assigns(:types)).to eq(Type.all)
-      end
+  describe "GET #index" do
 
-
-      it "redirects to type index page" do
-        get :index
-        expect(response).to redirect_to types_index_path
-      end
+    it "get all type list" do
+      get :index
+      expect(assigns(:types)).to eq(Type.all)
     end
 
-    describe "GET #show" do
-      it "show current assigned type" do
-        get :show, id: @type
-        expect(assigns(:type)).to eq(@type)
-      end
-
-      it 'redirects to current type page' do
-        get :show, id: @type
-        expect(response).to redirect_to types_show_path(@type)
-      end
+    it "redirects to type index page" do
+      get :index
+      expect(response).to redirect_to types_index_path
     end
+  end
+
+  describe "GET #show" do
+    it "show current assigned type" do
+      get :show, id: @type
+      expect(assigns(:type)).to eq(@type)
+    end
+
+    it 'redirects to current type page' do
+      get :show, id: @type
+      expect(response).to redirect_to types_show_path(@type)
+    end
+  end
 
   end
