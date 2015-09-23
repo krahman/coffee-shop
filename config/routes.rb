@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'pages#home'
+
   get 'orders/new'
   get 'orders/create'
   get 'orders/update'
