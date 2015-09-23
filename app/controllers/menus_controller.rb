@@ -1,7 +1,6 @@
 class MenusController < ApplicationController
 
-  before_action :get_type, only: [:new, :create]
-  before_action :get_size, only: [:new, :create]
+  before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def new
     @menu = Menu.new
@@ -10,31 +9,38 @@ class MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
 
-    if @menu.save
-      redirect_to menus_show_path(@menu), notice: 'Menu was successfully created'
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @menu.save
+        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.json { render :show, status: :created, location: @menu }
+      else
+        format.html { render :new }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    @menu = Menu.find(params[:id])
-
-    if @menu.update(menu_params)
-      redirect_to menus_show_path(@menu), notice: 'Menu was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @menu.update(menu_params)
+        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.json { render :show, status: :ok, location: @menu }
+      else
+        format.html { render :edit }
+        format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
-    @menu = Menu.find(params[:id])
   end
 
   def destroy
-    @menu = Menu.find(params[:id])
     @menu.destroy
-    redirect_to menus_index_path, notice: 'Menu was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to menus_url, notice: 'Menu was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def index
@@ -42,21 +48,16 @@ class MenusController < ApplicationController
   end
 
   def show
-    @menu = Menu.find(params[:id])
-
-    redirect_to menus_show_path(@menu)
   end
 
-  private 
+  private
+
+    def set_menu
+      @menu = Menu.find(params[:id])
+    end
+
     def menu_params
       params.require(:menu).permit(:name, :price, :type_id, :size_id)
     end
 
-    def get_type
-      @type = Type.find(params[:type_id])
-    end
-
-    def get_size
-      @size = Size.find(params[:size_id])
-    end
 end

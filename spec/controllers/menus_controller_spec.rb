@@ -25,7 +25,7 @@ RSpec.describe MenusController, type: :controller do
 
       it "redirects to the 'show' action for the new menu" do
         post :create, type_id: @type, size_id: @size, id: @menu, menu: FactoryGirl.attributes_for(:menu)
-        expect(response).to redirect_to menus_show_path(Menu.last)
+        expect(response).to redirect_to Menu.last
       end
     end 
   end
@@ -55,7 +55,7 @@ RSpec.describe MenusController, type: :controller do
 
     it 'redirects to the menu index page' do
       delete :destroy, {:id => @menu}
-      expect(response).to redirect_to menus_index_path
+      expect(response).to redirect_to menus_path
     end
   end
 
@@ -70,11 +70,6 @@ RSpec.describe MenusController, type: :controller do
     it "show current assigned menu" do
       get :show, id: @menu
       expect(assigns(:menu)).to eq(@menu)
-    end
-
-    it 'redirects to current menu page' do
-      get :show, id: @menu
-      expect(response).to redirect_to menus_show_path(@menu)
     end
   end
 
