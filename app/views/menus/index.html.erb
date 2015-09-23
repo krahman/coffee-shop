@@ -18,8 +18,8 @@
       <tr>
         <td><%= menu.name %></td>
         <td><%= menu.price %></td>
-        <td><%= menu.type %></td>
-        <td><%= menu.size %></td>
+        <td><%= menu.type.name %></td>
+        <td><%= menu.size.name %></td>
         <td><%= link_to 'Show', menu %></td>
         <td><%= link_to 'Edit', edit_menu_path(menu) %></td>
         <td><%= link_to 'Destroy', menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -12,12 +12,12 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @menu.type %>
+  <%= @menu.type.name %>
 </p>
 
 <p>
   <strong>Size:</strong>
-  <%= @menu.size %>
+  <%= @menu.size.name %>
 </p>
 
 <%= link_to 'Edit', edit_menu_path(@menu) %> |
