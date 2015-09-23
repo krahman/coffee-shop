@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
 
+  before :each do
+    @type = FactoryGirl.create(:type, name: 'Coffee')
+    @size = FactoryGirl.create(:size, name: 'Grande')
+    @menu = FactoryGirl.create(:menu, name: 'Espresso', price: 4.80, type_id: @type, size_id: @size)
+    @order = FactoryGirl.create(:order, qty: 1, menu: @menu)
+  end
+
   describe "GET #new" do
     it "returns http success" do
       get :new
