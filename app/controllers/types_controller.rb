@@ -1,4 +1,7 @@
 class TypesController < ApplicationController
+
+  before_action :set_type, only: [:show, :edit, :update, :destroy]
+
   def new
     @type = Type.new
   end
@@ -7,7 +10,7 @@ class TypesController < ApplicationController
     @type = Type.new(type_params)
 
     if @type.save
-      redirect_to types_show_path(@type), notice: 'Type was successfully created.'
+      redirect_to @type, notice: 'Type was successfully created.'
     else 
       render action: 'new'
     end
@@ -15,23 +18,26 @@ class TypesController < ApplicationController
   end
 
   def update
-    @type = Type.find(params[:id])
-
-    if @type.update(type_params)
-      redirect_to types_show_path(@type), notice: 'Type was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @type.update(type_params)
+        format.html { redirect_to @type, notice: 'Type was successfully updated.' }
+        format.json { render :show, status: :ok, location: @type }
+      else
+        format.html { render :edit }
+        format.json { render json: @type.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
-    @type = Type.find(params[:id])
   end
 
   def destroy
-    @type = Type.find(params[:id])
     @type.destroy
-    redirect_to types_index_path, notice: 'Type was succesfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to types_url, notice: 'Type was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def index
@@ -39,11 +45,14 @@ class TypesController < ApplicationController
   end
 
   def show
-    @type = Type.find(params[:id])
-    redirect_to types_show_path(@type)
   end
 
   private
+    
+    def set_type
+      @type = Type.find(params[:id])
+    end
+
     def type_params
       params.require(:type).permit(:name)
     end

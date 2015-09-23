@@ -1,5 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "types/show.html.erb", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe "types/show", type: :view do
+  before(:each) do
+    @type = assign(:type, Type.create!(
+      :name => "Name"
+    ))
+  end
+
+  it "renders attributes in <p>" do
+    render
+    expect(rendered).to match(/Name/)
+  end
 end

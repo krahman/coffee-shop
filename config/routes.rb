@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :types
+  resources :sizes
+  resources :menus
+  resources :orders
+  
   root 'pages#home'
 
   get 'orders/new'

@@ -22,7 +22,7 @@ RSpec.describe TypesController, type: :controller do
       end
       it 'redirects to the "show" action for the new type' do
         post :create, id: @type, type: FactoryGirl.attributes_for(:type)
-        expect(response).to redirect_to types_show_path(Type.last)
+        expect(response).to redirect_to Type.last
       end
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe TypesController, type: :controller do
 
     it 'redirects to the type index page' do
       delete :destroy, {:name => 'Coffee', :id => @type}
-      expect(response).to redirect_to types_index_path
+      expect(response).to redirect_to types_path
     end
   end
 
@@ -68,11 +68,6 @@ RSpec.describe TypesController, type: :controller do
     it "show current assigned type" do
       get :show, id: @type
       expect(assigns(:type)).to eq(@type)
-    end
-
-    it 'redirects to current type page' do
-      get :show, id: @type
-      expect(response).to redirect_to types_show_path(@type)
     end
   end
 
