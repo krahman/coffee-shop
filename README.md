@@ -35,5 +35,5 @@ Main app routes
 
 - Type **http://localhost:3000/types**
 - Size **http://localhost:3000/sizes**
-- Menu **http://localhost:3000/menu
+- Menu **http://localhost:3000/menus**
 
