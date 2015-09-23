@@ -23,7 +23,7 @@ RSpec.describe SizesController, type: :controller do
 
       it 'redirects to the "show" action for the new size' do
         post :create, id: @size, size: FactoryGirl.attributes_for(:size)
-        expect(response).to redirect_to sizes_show_path(Size.last)
+        expect(response).to redirect_to Size.last
       end
     end 
   end
@@ -53,7 +53,7 @@ RSpec.describe SizesController, type: :controller do
 
     it 'redirects to the size index page' do
       delete :destroy, {:id => @size}
-      expect(response).to redirect_to sizes_index_path
+      expect(response).to redirect_to sizes_path
     end
   end
 
@@ -68,11 +68,6 @@ RSpec.describe SizesController, type: :controller do
     it "show current assigned size" do
       get :show, id: @size
       expect(assigns(:size)).to eq(@size)
-    end
-
-    it 'redirects to current size page' do
-      get :show, id: @size
-      expect(response).to redirect_to sizes_show_path(@size)
     end
   end
 

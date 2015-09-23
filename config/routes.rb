@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :types
   resources :sizes
+  resources :types
   resources :menus
   resources :orders
   

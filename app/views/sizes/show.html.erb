@@ -1,2 +1,9 @@
-<h1>Sizes#show</h1>
-<p>Find me in app/views/sizes/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @size.name %>
+</p>
+
+<%= link_to 'Edit', edit_size_path(@size) %> |
+<%= link_to 'Back', sizes_path %>

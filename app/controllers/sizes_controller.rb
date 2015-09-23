@@ -1,4 +1,7 @@
 class SizesController < ApplicationController
+
+  before_action :set_size, only: [:show, :update, :edit, :destroy]
+
   def new
     @size = Size.new
   end
@@ -6,31 +9,38 @@ class SizesController < ApplicationController
   def create
     @size = Size.new(size_params)
 
-    if @size.save
-      redirect_to sizes_show_path(@size), notice: 'Size was successfully created.'
-    else
-      render action: 'new'
+    respond_to do |format|
+      if @size.save
+        format.html { redirect_to @size, notice: 'Size was successfully created.' }
+        format.json { render :show, status: :created, location: @size }
+      else
+        format.html { render :new }
+        format.json { render json: @size.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    @size = Size.find(params[:id])
-
-    if @size.update(size_params)
-      redirect_to sizes_show_path(@size), notice: 'Size was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @size.update(size_params)
+        format.html { redirect_to @size, notice: 'Size was successfully updated.' }
+        format.json { render :show, status: :ok, location: @size }
+      else
+        format.html { render :edit }
+        format.json { render json: @size.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
-    @size = Size.find(params[:id])
   end
 
   def destroy
-    @size = Size.find(params[:id])
     @size.destroy
-    redirect_to sizes_index_path, notice: 'Size was succesfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to sizes_url, notice: 'Size was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def index
@@ -38,11 +48,14 @@ class SizesController < ApplicationController
   end
 
   def show
-    @size = Size.find(params[:id])
-    redirect_to sizes_show_path(@size)
   end
 
   private
+
+    def set_size 
+      @size = Size.find(params[:id])
+    end
+
     def size_params
       params.require(:size).permit(:name)
     end

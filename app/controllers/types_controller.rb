@@ -9,10 +9,14 @@ class TypesController < ApplicationController
   def create
     @type = Type.new(type_params)
 
-    if @type.save
-      redirect_to @type, notice: 'Type was successfully created.'
-    else 
-      render action: 'new'
+    respond_to do |format|
+      if @type.save
+        format.html { redirect_to @type, notice: 'Type was successfully created.' }
+        format.json { render :show, status: :created, location: @type }
+      else
+        format.html { render :new }
+        format.json { render json: @type.errors, status: :unprocessable_entity }
+      end
     end
 
   end
